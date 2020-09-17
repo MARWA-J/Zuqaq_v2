@@ -1,7 +1,3 @@
-
-// const withImages = require('next-images')
-// module.exports = withImages()
-const withCSS = require('@zeit/next-css');
 const { PHASE_PRODUCTION_SERVER } =
   process.env.NODE_ENV === 'development'
     ? {} // We're never in "production server" phase when in development mode
@@ -17,7 +13,6 @@ module.exports = (phase, { defaultConfig }) => {
 
   /* eslint-disable */
   const withLess = require('@zeit/next-less')
-   
   const lessToJS = require('less-vars-to-js')
   const fs = require('fs')
   const path = require('path')
@@ -31,18 +26,12 @@ module.exports = (phase, { defaultConfig }) => {
   if (typeof require !== 'undefined') {
     require.extensions['.less'] = file => {}
   }
-module.exports = withCSS({CssLoaderOptions: {
-      cssLoaderOptions: {
-    url: false
-  }
-    }})
 
   return withLess({
     lessLoaderOptions: {
       javascriptEnabled: true,
       modifyVars: themeVariables // make your antd custom effective
     }
-    
   })
 };
 
